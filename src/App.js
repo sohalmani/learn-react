@@ -26,6 +26,7 @@ function App() {
 
   return (
     <div className="App">
+      <h4>This was from old version. We will start from new version now.</h4>
       <h1>Hi, this is my beginning in learning react.</h1>
       <p>This is really exciting...</p>
       <button onClick={switchNameHandler}>Switch name</button>
