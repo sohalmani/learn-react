@@ -1,4 +1,3 @@
-import React from 'react';
 import Expenses from './components/Expenses';
 
 function App() {
@@ -29,33 +28,12 @@ function App() {
     },
   ];
 
-  // --> This below is the latest syntax for JSX.
-  //     No need to imports React, works out of the box.
-
-  // return (
-  //   <div>
-  //     <h2>Let's get started!</h2>
-  //     <Expenses items={expenses} />
-  //   </div>
-  // );
-
-  // --> This below is how JSX works under the hood.
-  //     We need to import React for this.
-
-  return React.createElement(
-    'div',
-    {},
-    React.createElement(
-      'h2',
-      {},
-      "Let's get started!",
-      React.createElement(Expenses, { items: expenses })
-    )
+  return (
+    <div>
+      <h2>Let's get started!</h2>
+      <Expenses items={expenses} />
+    </div>
   );
-
-  // If you look closely to syntax above,
-  // you will understand why we need one root element,
-  // and why we cannot return two siblings at once.
 }
 
 export default App;
