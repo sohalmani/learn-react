@@ -1,18 +1,19 @@
+import { useState } from 'react';
 import Card from '../UI/Card';
 import ExpenseDate from './ExpenseDate';
 import './ExpenseItem.css';
 
 const ExpenseItem = (props) => {
-  let title = props.title;
+  const [title, setTitle] = useState(props.title);
 
   const clickHandler = () => {
-    title = 'Updated';
+    setTitle('Updated');
     console.log(title);
   };
 
-  // Title does not update in above way
-  // as we just change title value but
-  // the component does not re-render.
+  // Title changes, but when we console it after change,
+  // it shows the old title. This is because React useState
+  // schedules the change. This does not stop current function execution.
 
   return (
     <Card className="expense-item">
