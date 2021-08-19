@@ -37,9 +37,32 @@ const ExpenseForm = () => {
   });
 
   const titleChangeHandler = (event) => {
-    setUserInput({
-      ...userInput,
-      enteredTitle: event.target.value,
+    /**
+     * The below method is not recommended.
+     * React schedules state updates. If we
+     * have a lot of state changes there may
+     * be cases where the state object we
+     * receive below is not up-to-date.
+     */
+
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: event.target.value,
+    // });
+
+    /**
+     * Using below method ensures we always
+     * have an updated prevsious state.
+     * NOTICE: We still cannot spread userInput
+     * array afterwards. Doing that will override
+     * changed value.
+     */
+
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredTitle: event.target.value,
+      };
     });
   };
 
