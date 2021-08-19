@@ -1,50 +1,41 @@
-import { useState } from 'react';
-import './App.css';
-import Person from './Person/Person';
+import NewExpense from './components/NewExpense/NewExpense';
+import Expenses from './components/Expenses/Expenses';
 
-function App() {
-  const [personState, setPersonState] = useState({
-    persons: [
-      { name: 'Mani', age: '21' },
-      { name: 'Chander', age: '24' },
-      { name: 'Muskaan', age: '20' },
-    ],
-  });
-
-  // eslint-disable-next-line
-  const [otherState, setOtherState] = useState('some new value');
-
-  const switchNameHandler = () => {
-    setPersonState({
-      persons: [
-        { name: 'Maninder', age: '22' },
-        { name: 'Chander', age: '24' },
-        { name: 'Muskaan', age: '21' },
-      ],
-    });
-  };
+const App = () => {
+  const expenses = [
+    {
+      id: 'e1',
+      title: 'Toilet Paper',
+      amount: 94.12,
+      date: new Date(2020, 7, 14),
+    },
+    {
+      id: 'e2',
+      title: 'New TV',
+      amount: 799.49,
+      date: new Date(2021, 2, 12),
+    },
+    {
+      id: 'e3',
+      title: 'Car Insurance',
+      amount: 294.67,
+      date: new Date(2021, 2, 28),
+    },
+    {
+      id: 'e4',
+      title: 'New Desk (Wooden)',
+      amount: 450,
+      date: new Date(2021, 5, 12),
+    },
+  ];
 
   return (
-    <div className="App">
-      <h1>Hi, this is my beginning in learning react.</h1>
-      <p>This is really exciting...</p>
-      <button onClick={switchNameHandler}>Switch name</button>
-      <Person
-        name={personState.persons[0].name}
-        age={personState.persons[0].age}
-      />
-      <Person
-        name={personState.persons[1].name}
-        age={personState.persons[1].age}
-      >
-        Chander loves to exercise.
-      </Person>
-      <Person
-        name={personState.persons[2].name}
-        age={personState.persons[2].age}
-      />
+    <div>
+      <h2>Let's get started!</h2>
+      <NewExpense />
+      <Expenses items={expenses} />
     </div>
   );
-}
+};
 
 export default App;
