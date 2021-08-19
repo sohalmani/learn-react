@@ -2,23 +2,69 @@ import { useState } from 'react';
 import './ExpenseForm.css';
 
 const ExpenseForm = () => {
-  const [enteredTitle, setEnteredTitle] = useState('');
+  /**
+   * The below method was to use multiple
+   * useState methods to manage state.
+   */
+
+  // const [enteredTitle, setEnteredTitle] = useState('');
+
+  // const titleChangeHandler = (event) => {
+  //   setEnteredTitle(event.target.value);
+  // };
+
+  // const [enteredAmount, setEnteredAmount] = useState('');
+
+  // const amountChangeHandler = (event) => {
+  //   setEnteredAmount(event.target.value);
+  // };
+
+  // const [enteredDate, setEnteredDate] = useState('');
+
+  // const dateChangeHandler = (event) => {
+  //   setEnteredDate(event.target.value);
+  // };
+
+  /**
+   * Now, in below method we will use a
+   * single state to manage all inputs.
+   */
+
+  const [userInput, setUserInput] = useState({
+    enteredTitle: '',
+    enteredAmount: '',
+    enteredDate: '',
+  });
 
   const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredTitle: event.target.value,
+    });
   };
-
-  const [enteredAmount, setEnteredAmount] = useState('');
 
   const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredAmount: event.target.value,
+    });
   };
-
-  const [enteredDate, setEnteredDate] = useState('');
 
   const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredDate: event.target.value,
+    });
   };
+
+  /**
+   * Note: Notice we spread the userInput object
+   * before we change any value. This is because
+   * spreading it before does not bring back the
+   * old value. Rather changing it afterwards makes
+   * sure we override the old value, thus ensuring
+   * we always have new updated value.
+   */
 
   return (
     <form action="">
