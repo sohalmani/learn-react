@@ -20,30 +20,35 @@ const ExpenseForm = () => {
     setEnteredDate(event.target.value);
   };
 
-  // This function is called when form is submit.
-  // Note that we use event.preventDefault() to 
-  // prevent the page from loading when the form is submitted.
-  // Instead, we store the data in an object 
-  // to utilise it for later use and other components.
-
   const submitHandler = (event) => {
     event.preventDefault();
 
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
-      date: enteredDate,
+      date: new Date(enteredDate),
     }
 
     console.log(expenseData);
+
+    // Reset the values again after form submittion
+
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredDate('');
   }
+
+  // Use the initial value as a default value 
+  // for the inputs in the form. This also make sure 
+  // the changes are synchronous and reflected after 
+  // form submittion. This method is called two-way binding.
 
   return (
     <form action="" onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label htmlFor="title">Title</label>
-          <input type="text" id="title" onChange={titleChangeHandler} />
+          <input type="text" id="title" value={enteredTitle} onChange={titleChangeHandler} />
         </div>
         <div className="new-expense__control">
           <label htmlFor="amount">Amount</label>
@@ -52,6 +57,7 @@ const ExpenseForm = () => {
             min="0.01"
             step="0.01"
             id="amount"
+            value={enteredAmount}
             onChange={amountChangeHandler}
           />
         </div>
@@ -62,6 +68,7 @@ const ExpenseForm = () => {
             min="2019-01-01"
             max="2022-12-31"
             id="date"
+            value={enteredDate}
             onChange={dateChangeHandler}
           />
         </div>
