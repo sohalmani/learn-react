@@ -2,51 +2,44 @@ import { useState } from 'react';
 import './ExpenseForm.css';
 
 const ExpenseForm = () => {
-  // Using a single state instead of multiple state. 
-  // Note that an object is used for storing mulitple values. 
-  // The set function is called to set value on change, 
-  // also the existing state is spread to keep other value intact.
-
-  const [userInput, setUserInput] = useState({
-    enteredTitle: '',
-    enteredAmount: '',
-    enteredDate: '',
-  });
-
-  // const [enteredTitle, setEnteredTitle] = useState('');
+  const [enteredTitle, setEnteredTitle] = useState('');
 
   const titleChangeHandler = (event) => {
-    // setEnteredTitle(event.target.value);
-    setUserInput({
-      ...userInput,
-      enteredTitle: event.target.value
-    });
+    setEnteredTitle(event.target.value);
   };
 
-  // const [enteredAmount, setEnteredAmount] = useState('');
+  const [enteredAmount, setEnteredAmount] = useState('');
 
   const amountChangeHandler = (event) => {
-    // setEnteredAmount(event.target.value);
-    setUserInput({
-      ...userInput,
-      enteredAmount: event.target.value
-    });
+    setEnteredAmount(event.target.value);
   };
 
-  // const [enteredDate, setEnteredDate] = useState('');
+  const [enteredDate, setEnteredDate] = useState('');
 
   const dateChangeHandler = (event) => {
-    // setEnteredDate(event.target.value);
-    setUserInput({
-      ...userInput,
-      enteredDate: event.target.value
-    });
+    setEnteredDate(event.target.value);
   };
 
-  console.log(userInput);
+  // This function is called when form is submit.
+  // Note that we use event.preventDefault() to 
+  // prevent the page from loading when the form is submitted.
+  // Instead, we store the data in an object 
+  // to utilise it for later use and other components.
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: enteredDate,
+    }
+
+    console.log(expenseData);
+  }
 
   return (
-    <form action="">
+    <form action="" onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label htmlFor="title">Title</label>
