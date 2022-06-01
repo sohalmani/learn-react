@@ -29,8 +29,6 @@ const ExpenseForm = (props) => {
       date: new Date(enteredDate),
     }
 
-    // Call the method received as a prop and 
-    // pass the expense data
     props.onSaveExpensesData(expenseData);
 
     setEnteredTitle('');
