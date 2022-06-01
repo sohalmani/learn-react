@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
 
   const titleChangeHandler = (event) => {
@@ -29,19 +29,14 @@ const ExpenseForm = () => {
       date: new Date(enteredDate),
     }
 
-    console.log(expenseData);
-
-    // Reset the values again after form submittion
+    // Call the method received as a prop and 
+    // pass the expense data
+    props.onSaveExpensesData(expenseData);
 
     setEnteredTitle('');
     setEnteredAmount('');
     setEnteredDate('');
   }
-
-  // Use the initial value as a default value 
-  // for the inputs in the form. This also make sure 
-  // the changes are synchronous and reflected after 
-  // form submittion. This method is called two-way binding.
 
   return (
     <form action="" onSubmit={submitHandler}>
