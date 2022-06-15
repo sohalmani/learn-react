@@ -3,7 +3,6 @@ import React from 'react';
 import './ExpensesFilter.css';
 
 const ExpensesFilter = (props) => {
-  // lift the state up
   const handleSelectChange = (event) => {
     props.onFilterChange(event.target.value);
   }
