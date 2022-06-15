@@ -13,23 +13,30 @@ const Expenses = (props) => {
     setFilteredYear(selectedYear);
   }
 
-  // filter the expenses based on 
-  // the year we have in state at all times
   expenses = expenses.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear
   });
 
+  // Store content message for no expenses
+  let expensesContent = <p>No expenses found!</p>;
+
+  // If there are expenses, store all of them 
+  // in a variable and output in JSX
+  if (expenses.length > 0) {
+    expensesContent = expenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ))
+  }
+
   return (
     <Card className="expenses">
       <ExpensesFilter selectedYear={filteredYear} onFilterChange={handleFilterChange} />
-      {expenses && expenses.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      {expensesContent}
     </Card>
   );
 };
