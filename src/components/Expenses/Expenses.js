@@ -1,15 +1,22 @@
+import { useState } from 'react';
 import Card from '../UI/Card';
+import ExpensesFilter from './ExpensesFilter';
 import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 
 const Expenses = (props) => {
   const expenses = props.items;
-  
-  // Add "key" so that React uniquely identifies 
-  // the component and only updates that instead of 
-  // updating all components.
+
+  // pass initial data and bind it in both ways
+  const [filteredYear, setFilteredYear] = useState('2020');
+
+  const handleFilterChange = (selectedYear) => {
+    setFilteredYear(selectedYear);
+  }
+
   return (
     <Card className="expenses">
+      <ExpensesFilter selectedYear={filteredYear} onFilterChange={handleFilterChange} />
       {expenses && expenses.map((expense) => (
         <ExpenseItem
           key={expense.id}
