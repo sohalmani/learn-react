@@ -2,7 +2,6 @@ import ExpenseItem from "./ExpenseItem";
 import "./ExpensesList.css";
 
 const ExpensesList = (props) => {
-  // conditionally return the output based on available expenses
   if (props.items.length <= 0) {
     return <h2 className="expenses-list__fallback">No expenses found!</h2>;
   }

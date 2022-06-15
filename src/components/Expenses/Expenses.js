@@ -17,7 +17,6 @@ const Expenses = (props) => {
     return expense.date.getFullYear().toString() === filteredYear
   });
 
-  // add expenses list as different component
   return (
     <Card className="expenses">
       <ExpensesFilter selectedYear={filteredYear} onFilterChange={handleFilterChange} />
