@@ -3,9 +3,6 @@ import styled from 'styled-components';
 
 import Button from '../../UI/Button/Button';
 
-// since styled component automatically get props,
-// utilise it using arrow function and render value
-// accordingly.
 const FormControl = styled.div`
   margin: 0.5rem 0;
 
@@ -53,8 +50,6 @@ const CourseInput = (props) => {
     props.onAddGoal(enteredValue);
   };
 
-  // In below case, passed prop will be checked in styled component
-  // and style will be rendered accordingly.
   return (
     <form onSubmit={formSubmitHandler}>
       <FormControl invalid={!isValid}>
