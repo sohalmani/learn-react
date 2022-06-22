@@ -23,7 +23,6 @@
   border-color: #8b005d;
 }
 
-/* Add invalid style based on invalid class */
 .form-control.invalid label {
   color: red;
 }
