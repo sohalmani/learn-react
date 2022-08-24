@@ -6,18 +6,39 @@ import ErrorModal from './components/UI/ErrorModal';
 
 function App() {
   const [usersList, setUsersList] = useState([]);
+  const [error, setError] = useState();
 
   const handleUserAdd = (uName, uAge) => {
     setUsersList((prevUsersList) => {
-      return [...prevUsersList, { id: Math.random().toString(), name: uName, age: uAge }];
+      return [
+        ...prevUsersList,
+        { id: Math.random().toString(), name: uName, age: uAge },
+      ];
     });
-  }
+  };
+
+  const handleError = (errObj) => {
+    setError({
+      title: errObj.title,
+      message: errObj.message,
+    });
+  };
+
+  const removeErrorModal = () => {
+    setError(null);
+  };
 
   return (
     <div>
-      <AddUser onAddUser={handleUserAdd} />
-      <UsersList users={usersList} />
-      <ErrorModal title="An Error Occured!" message="Something went wrong!" />
+      <AddUser onAddUser={handleUserAdd} onError={handleError} />
+      {usersList.length && <UsersList users={usersList} />}
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onClick={removeErrorModal}
+        />
+      )}
     </div>
   );
 }
