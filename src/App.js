@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import AddUser from './components/AddUser/AddUser';
 import UsersList from './components/AddUser/UsersList';
+import ErrorModal from './components/UI/ErrorModal';
 
 function App() {
   const [usersList, setUsersList] = useState([]);
@@ -16,6 +17,7 @@ function App() {
     <div>
       <AddUser onAddUser={handleUserAdd} />
       <UsersList users={usersList} />
+      <ErrorModal title="An Error Occured!" message="Something went wrong!" />
     </div>
   );
 }
