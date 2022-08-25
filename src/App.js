@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import AddUser from './components/Users/AddUser';
 import UsersList from './components/Users/UsersList';
 import ErrorModal from './components/UI/ErrorModal';
+import Wrapper from './components/Helpers/Wrapper';
 
 function App() {
   const [usersList, setUsersList] = useState([]);
@@ -30,27 +31,23 @@ function App() {
   };
 
   /**
-   * In React, each component should return exactly one element,
-   * it cannot return two adjacent elements.
-   * To solve this, we can return multiple elements in form of an array,
-   * but keep in mind that in case of array, React needs that each element
-   * in array should have a unique "key" binded to it so that it can 
-   * recognise and update it.
-   * In below example, we have give custom keys to components.
+   * Using Wrapper component here will return only children,
+   * as Wrapper component itself return only children
    */
 
-  return [
-    <AddUser key="add-user-card" onAddUser={handleUserAdd} onError={handleError} />,
-    !!usersList.length && <UsersList key="users-list-card" users={usersList} />,
-    error && (
-      <ErrorModal
-        key="error-modal"
-        title={error.title}
-        message={error.message}
-        onConfirm={removeErrorModal}
-      />
-    ),
-  ];
+  return (
+    <Wrapper>
+      <AddUser onAddUser={handleUserAdd} onError={handleError} />
+      {!!usersList.length && <UsersList key="users-list-card" users={usersList} />}
+      {error && (
+        <ErrorModal
+          key="error-modal"
+          title={error.title}
+          message={error.message}
+          onConfirm={removeErrorModal}
+        />)}
+    </Wrapper>
+  );
 }
 
 export default App;
