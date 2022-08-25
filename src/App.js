@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 
 import AddUser from './components/Users/AddUser';
 import UsersList from './components/Users/UsersList';
 import ErrorModal from './components/UI/ErrorModal';
-import Wrapper from './components/Helpers/Wrapper';
 
 function App() {
   const [usersList, setUsersList] = useState([]);
@@ -30,13 +29,8 @@ function App() {
     setError(null);
   };
 
-  /**
-   * Using Wrapper component here will return only children,
-   * as Wrapper component itself return only children
-   */
-
   return (
-    <Wrapper>
+    <Fragment>
       <AddUser onAddUser={handleUserAdd} onError={handleError} />
       {!!usersList.length && <UsersList key="users-list-card" users={usersList} />}
       {error && (
@@ -46,7 +40,7 @@ function App() {
           message={error.message}
           onConfirm={removeErrorModal}
         />)}
-    </Wrapper>
+    </Fragment>
   );
 }
 
