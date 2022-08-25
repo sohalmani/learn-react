@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import AddUser from './components/AddUser/AddUser';
-import UsersList from './components/AddUser/UsersList';
+import AddUser from './components/Users/AddUser';
+import UsersList from './components/Users/UsersList';
 import ErrorModal from './components/UI/ErrorModal';
 
 function App() {
@@ -24,7 +24,8 @@ function App() {
     });
   };
 
-  const removeErrorModal = () => {
+  const removeErrorModal = (event) => {
+    event.stopPropagation();
     setError(null);
   };
 
@@ -36,7 +37,7 @@ function App() {
         <ErrorModal
           title={error.title}
           message={error.message}
-          onClick={removeErrorModal}
+          onConfirm={removeErrorModal}
         />
       )}
     </div>
