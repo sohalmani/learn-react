@@ -1,4 +1,11 @@
-import { useState } from 'react';
+/**
+ * useRef is React builtin method used particulary for
+ * reading values. Its shortens the code for that.
+ * For manipulating DOM and state, it is recommended to
+ * useState, although useRef can be used but it is not
+ * made for that purpose.
+ */ 
+import { useRef } from 'react';
 
 import Card from '../UI/Card';
 import Button from '../UI/Button';
@@ -6,19 +13,19 @@ import Button from '../UI/Button';
 import classes from './AddUser.module.css';
 
 const AddUser = (props) => {
-  const [enteredUsername, setEnteredUsername] = useState('');
-  const [enteredAge, setEnteredAge] = useState('');
-
-  const handleUsernameChange = (event) => {
-    setEnteredUsername(event.target.value);
-  };
-
-  const handleAgeChange = (event) => {
-    setEnteredAge(event.target.value);
-  };
+  /**
+   * useRef creates a reference to and element
+   * such that upon referenceing to that element, 
+   * it returns the actual DOM node of that element
+   */
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const handleAddUserSubmit = (event) => {
     event.preventDefault();
+
+    const enteredUsername = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
 
     if (enteredUsername.trim().length === 0 && enteredAge.trim().length === 0) {
       props.onError({
@@ -39,29 +46,24 @@ const AddUser = (props) => {
     }
 
     props.onAddUser(enteredUsername, enteredAge);
-    setEnteredUsername('');
-    setEnteredAge('');
+
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
   };
+
+  /**
+   * React has provided a special built-in prop 
+   * called 'ref' which is used to reference to
+   * the element. It is available for all elements
+   */
 
   return (
     <Card className={classes.input}>
       <form onSubmit={handleAddUserSubmit}>
         <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          value={enteredUsername}
-          onChange={handleUsernameChange}
-        />
+        <input type="text" name="username" id="username" ref={nameInputRef} />
         <label htmlFor="age">Age (Years)</label>
-        <input
-          type="text"
-          name="age"
-          id="age"
-          value={enteredAge}
-          onChange={handleAgeChange}
-        />
+        <input type="text" name="age" id="age" ref={ageInputRef} />
         <Button type="submit">Add User</Button>
       </form>
     </Card>

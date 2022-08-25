@@ -30,15 +30,6 @@ function App() {
     setError(null);
   };
 
-  /**
-   * createPortal is an inbuilt functtion available in React-DOM.
-   * createPortal helps user to port/move any JSX component to 
-   * any particular place inside the HTML DOM.
-   * In below example, we displayed the ErrorModal outside the "root"
-   * div, to a new different div called "backdrop-root", that we
-   * created ourselves in index.html
-   */
-
   return (
     <Fragment>
       <AddUser onAddUser={handleUserAdd} onError={handleError} />
